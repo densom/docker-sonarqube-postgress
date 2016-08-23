@@ -1,6 +1,26 @@
 version: "2"
 
 services:
+  jenkins:
+    image: jenkins:2.7.2
+    ports:
+      - "8081:8080"
+      - "50000:50000"
+    networks:
+      - sonarnet
+    volumes:
+      - jenkins_home:/var/jenkins_home
+
+  jenkins_slave1:
+    image: evarga/jenkins-slave
+    networks:
+      - sonarnet
+  
+  jenkins_slave2:
+    image: evarga/jenkins-slave
+    networks:
+      - sonarnet
+
   sonarqube:
     image: sonarqube:6.0
     ports:
@@ -38,3 +58,4 @@ volumes:
   sonarqube_bundled_plugins:
   postgresql:
   postgresql_data:
+  jenkins_home:
