@@ -21,6 +21,14 @@ services:
     networks:
       - sonarnet
 
+  jenkins_msbuild_slave1:
+    build:
+      context: .
+      dockerfile: msbuild_jenkins_slave.Dockerfile
+    image: densom/msbuild_jenkins
+    networks:
+      - sonarnet
+
   sonarqube:
     image: sonarqube:6.0
     ports:
